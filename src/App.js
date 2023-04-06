@@ -21,7 +21,6 @@ const App = () => {
           <FormComponent num="2" />
         </Tab>
       </Tabs>
-      <Card.Body></Card.Body>
     </Card>
   );
 };

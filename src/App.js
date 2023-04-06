@@ -1,26 +1,14 @@
 import "./App.css";
-import { Card } from "react-bootstrap";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Tab from "react-bootstrap/Tab";
-import Tabs from "react-bootstrap/Tabs";
-import FormComponent from "./components/FormComponent";
+import { Routes, Route } from "react-router-dom";
+import CardComponent from "./components/CardComponent";
+import UserProfile from "./pages/UserProfile";
 
 const App = () => {
   return (
-    <Card style={{ width: "40rem" }}>
-      <Tabs
-        defaultActiveKey="logIn"
-        id="uncontrolled-tab-example"
-        className="mb-3"
-      >
-        <Tab eventKey="logIn" title="Log In">
-          <FormComponent num="1" />
-        </Tab>
-        <Tab eventKey="singIn" title="Sing In">
-          <FormComponent num="2" />
-        </Tab>
-      </Tabs>
-    </Card>
+    <Routes>
+      <Route path="/" element={<CardComponent />} />
+      <Route path="/id" element={<UserProfile />} />
+    </Routes>
   );
 };
 

@@ -1,7 +1,6 @@
 import "./App.css";
-import { Button, Card } from "react-bootstrap";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import Nav from "react-bootstrap/Nav";
+import { Card } from "react-bootstrap";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import FormComponent from "./components/FormComponent";

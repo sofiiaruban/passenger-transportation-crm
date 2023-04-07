@@ -1,23 +1,24 @@
 import Form from "react-bootstrap/Form";
-import { Button, Card } from "react-bootstrap";
-import { useState } from "react";
+import { Button } from "react-bootstrap";
+import { useState, useContext } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import { AuthContext } from "../context/AuthContext";
 const FormComponent = ({ num }) => {
   const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { dispatch } = useContext(AuthContext);
 
   const handlerSubmit = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log("user");
+        dispatch({ type: "LOGIN", payload: user });
         navigate("/id");
       })
       .catch((error) => {

@@ -23,22 +23,20 @@ const UserProfile = () => {
 
   const roles = ["Driver", "Passenger", "Manager"];
 
-  const addNewUserClickHandler = () => {
-    !isOpenAddNew ? setIsOpenAddNew(true) : setIsOpenAddNew(false);
-  };
+  const toggleState = (state, setState) => () => setState(!state);
 
-  const addNewTripClickHandler = () => {
-    !isOpenNewTrip ? setIsNewTrip(true) : setIsNewTrip(false);
-  };
+  const addNewUserClickHandler = toggleState(isOpenAddNew, setIsOpenAddNew);
+
+  const addNewTripClickHandler = toggleState(isOpenNewTrip, setIsNewTrip);
 
   const checkboxOnchangeHandler = (e) => {
     setRole(e.target.value);
   };
-  const getData = async (collectionName, func) => {
+  const getData = async (collectionName, setState) => {
     const q = query(collection(db, collectionName));
     const querySnapshot = await getDocs(q);
     const data = querySnapshot.docs.map((doc) => doc.data());
-    func((prev) => [...prev, ...data]);
+    setState((prev) => [...prev, ...data]);
   };
   useEffect(() => {
     getData("users", setUsers);

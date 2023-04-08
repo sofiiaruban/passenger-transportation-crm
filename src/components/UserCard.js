@@ -20,7 +20,9 @@ const InfoCard = ({ title, data, keys }) => {
         <Card.Title>{title}</Card.Title>
         <ListGroup>
           {keys.map((key) => (
-            <ListGroup.Item key={key}>{`${key}: ${data[key]}`}</ListGroup.Item>
+            <ListGroup.Item key={key}>{`${prepareKey(key)}: ${
+              data[key]
+            }`}</ListGroup.Item>
           ))}
         </ListGroup>
       </Card.Body>

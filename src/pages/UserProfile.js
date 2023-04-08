@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { query, getDocs } from "firebase/firestore";
-import UserCard from "../components/UserCard";
+import InfoCard from "../components/InfoCard";
 import TripCard from "../components/TripCard";
 
 const UserProfile = () => {
@@ -84,25 +84,25 @@ const UserProfile = () => {
           Add new trip
         </Button>
       )}
-      {users &&
-        users.map((user) => (
-          <UserCard
-            key={user.id}
-            name={user.name}
-            surname={user.surname}
-            role={user.role}
-          />
-        ))}
-      {trips &&
-        trips.map((trip) => (
-          <TripCard
-            key={trip.id}
-            from={trip.from}
-            passengerVolume={trip.passengerVolume}
-            plateNumber={trip.plateNumber}
-            to={trip.to}
-          ></TripCard>
-        ))}
+      {users && (
+        <>
+          <Card.Title className="mb-3">All users:</Card.Title>
+          {users.map((user) => (
+            <InfoCard data={user} keys={["name", "surname", "role"]} />
+          ))}
+        </>
+      )}
+      {trips && (
+        <>
+          <Card.Title className="mb-3">All trips:</Card.Title>
+          {trips.map((trip) => (
+            <InfoCard
+              data={trip}
+              keys={["from", "to", "passengerVolume", "plateNumber"]}
+            ></InfoCard>
+          ))}
+        </>
+      )}
       {isOpenAddNew && (
         <Card style={{ width: "40rem" }}>
           <Form onSubmit={addNewUserFormSubmitHandler}>

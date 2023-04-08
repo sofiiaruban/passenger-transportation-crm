@@ -17,7 +17,6 @@ const InfoCard = ({ title, data, keys }) => {
   return (
     <Card style={{ width: "30rem" }}>
       <Card.Body>
-        <Card.Title>{title}</Card.Title>
         <ListGroup>
           {keys.map((key) => (
             <ListGroup.Item key={key}>{`${prepareKey(key)}: ${

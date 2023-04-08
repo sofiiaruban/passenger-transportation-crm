@@ -1,17 +1,30 @@
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 
-const UserCard = ({ name, surname, role }) => {
+const InfoCard = ({ title, data, keys }) => {
+  const prepareKey = (str) => {
+    let preparedKey = str.charAt(0).toUpperCase();
+    let length = str.length;
+    for (let i = 1; i < length; i++) {
+      if (str[i] !== str[i].toUpperCase()) {
+        preparedKey += str[i];
+      } else {
+        preparedKey += " " + str[i];
+      }
+    }
+    return preparedKey;
+  };
   return (
     <Card style={{ width: "30rem" }}>
       <Card.Body>
+        <Card.Title>{title}</Card.Title>
         <ListGroup>
-          <ListGroup.Item>Name: {name}</ListGroup.Item>
-          <ListGroup.Item>Surname: {surname}</ListGroup.Item>
-          <ListGroup.Item>Role: {role}</ListGroup.Item>
+          {keys.map((key) => (
+            <ListGroup.Item key={key}>{`${key}: ${data[key]}`}</ListGroup.Item>
+          ))}
         </ListGroup>
       </Card.Body>
     </Card>
   );
 };
-export default UserCard;
+export default InfoCard;

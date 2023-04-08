@@ -7,7 +7,6 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { query, getDocs } from "firebase/firestore";
 import InfoCard from "../components/InfoCard";
-import TripCard from "../components/TripCard";
 
 const UserProfile = () => {
   const [isOpenAddNew, setIsOpenAddNew] = useState(false);

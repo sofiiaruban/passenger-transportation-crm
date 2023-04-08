@@ -45,26 +45,23 @@ const UserProfile = () => {
     getData("trips", setTrips);
   }, []);
 
-  const addNewUserFormSubmitHandler = async (e) => {
+  const handleSubmit = (collectionName, data, setState) => async (e) => {
     e.preventDefault();
-    const docRef = await addDoc(collection(db, "users"), {
-      name: name,
-      surname: surname,
-      role: role,
-    });
-    setIsOpenAddNew(false);
+    const docRef = await addDoc(collection(db, collectionName), data);
+    setState(false);
   };
 
-  const addNewTripFormSubmitHandler = async (e) => {
-    e.preventDefault();
-    const docRef = await addDoc(collection(db, "trips"), {
-      from: from,
-      to: to,
-      plateNumber: plateNum,
-      passengerVolume: passengerVolume,
-    });
-    setIsNewTrip(false);
-  };
+  const addNewUserFormSubmitHandler = handleSubmit(
+    "users",
+    { name, surname, role },
+    setIsOpenAddNew
+  );
+
+  const addNewTripFormSubmitHandler = handleSubmit(
+    "trips",
+    { from, to, plateNumber: plateNum, passengerVolume },
+    setIsNewTrip
+  );
   return (
     <>
       {!isOpenAddNew && (

@@ -2,6 +2,7 @@ import "./App.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import UserProfile from "./pages/UserProfile";
 import Home from "./pages/Home";
+import UserCard from "./components/UserCard";
 import { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
 
@@ -24,10 +25,26 @@ const App = () => {
         }
       />
       <Route
-        path="/id"
+        path="/userprofile"
         element={
           <RequireAuth>
             <UserProfile />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/user"
+        element={
+          <RequireAuth>
+            <UserCard />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/user/:id"
+        element={
+          <RequireAuth>
+            <UserCard editMode={true} />
           </RequireAuth>
         }
       />

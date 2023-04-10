@@ -19,7 +19,7 @@ const FormComponent = ({ num }) => {
       .then((userCredential) => {
         const user = userCredential.user;
         dispatch({ type: "LOGIN", payload: user });
-        navigate("/id");
+        navigate("/userprofile");
       })
       .catch((error) => {
         setError(true);

@@ -7,13 +7,13 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { query, getDocs } from "firebase/firestore";
 import InfoCard from "../components/InfoCard";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import { Link } from "react-router-dom";
 
 const UserProfile = () => {
   const [isOpenAddNew, setIsOpenAddNew] = useState(false);
   const [isOpenNewTrip, setIsNewTrip] = useState(false);
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [role, setRole] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [plateNum, setPlateNum] = useState("");
@@ -21,27 +21,23 @@ const UserProfile = () => {
   const [users, setUsers] = useState([]);
   const [trips, setTrips] = useState([]);
 
-  const roles = ["Driver", "Passenger", "Manager"];
-
   const toggleState = (state, setState) => () => setState(!state);
 
   const addNewUserClickHandler = toggleState(isOpenAddNew, setIsOpenAddNew);
 
   const addNewTripClickHandler = toggleState(isOpenNewTrip, setIsNewTrip);
 
-  const checkboxOnchangeHandler = (e) => {
-    setRole(e.target.value);
-  };
-  const getData = async (collectionName, setState) => {
-    const q = query(collection(db, collectionName));
-    const querySnapshot = await getDocs(q);
-    const data = querySnapshot.docs.map((doc) => doc.data());
-    setState((prev) => [...prev, ...data]);
-  };
   useEffect(() => {
+    const getData = async (collectionName, setState) => {
+      const q = query(collection(db, collectionName));
+      const querySnapshot = await getDocs(q);
+      const data = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setState((prev) => [...prev, ...data]);
+    };
     getData("users", setUsers);
-  }, []);
-  useEffect(() => {
     getData("trips", setTrips);
   }, []);
 
@@ -51,12 +47,11 @@ const UserProfile = () => {
     setState(false);
   };
 
-  const addNewUserFormSubmitHandler = handleSubmit(
-    "users",
-    { name, surname, role },
-    setIsOpenAddNew
-  );
-
+  //const addNewUserFormSubmitHandler = handleSubmit(
+  //  "users",
+  //  { name, surname, role },
+  //  setIsOpenAddNew
+  //);
   const addNewTripFormSubmitHandler = handleSubmit(
     "trips",
     { from, to, plateNumber: plateNum, passengerVolume },
@@ -65,13 +60,15 @@ const UserProfile = () => {
   return (
     <>
       {!isOpenAddNew && (
-        <Button
-          variant="primary"
-          className="mb-3"
-          onClick={addNewUserClickHandler}
-        >
-          Add new user
-        </Button>
+        <Link to="/user">
+          <Button
+            variant="primary"
+            className="mb-3"
+            onClick={addNewUserClickHandler}
+          >
+            Add new user
+          </Button>
+        </Link>
       )}
 
       {!isOpenNewTrip && (
@@ -83,26 +80,41 @@ const UserProfile = () => {
           Add new trip
         </Button>
       )}
-      {users && (
-        <>
-          <Card.Title className="mb-3">All users:</Card.Title>
-          {users.map((user) => (
-            <InfoCard data={user} keys={["name", "surname", "role"]} />
-          ))}
-        </>
-      )}
-      {trips && (
-        <>
-          <Card.Title className="mb-3">All trips:</Card.Title>
-          {trips.map((trip) => (
-            <InfoCard
-              data={trip}
-              keys={["from", "to", "passengerVolume", "plateNumber"]}
-            ></InfoCard>
-          ))}
-        </>
-      )}
-      {isOpenAddNew && (
+      <Container>
+        <Row>
+          <Col>
+            {users && (
+              <>
+                <Card.Title className="mb-3">All users:</Card.Title>
+                {users.map((user) => (
+                  <Link to={`/user/${user.id}`}>
+                    <InfoCard
+                      key={user.id}
+                      data={user}
+                      keys={["name", "surname", "role"]}
+                    />
+                  </Link>
+                ))}
+              </>
+            )}
+          </Col>
+          <Col>
+            {trips && (
+              <>
+                <Card.Title className="mb-3">All trips:</Card.Title>
+                {trips.map((trip) => (
+                  <InfoCard
+                    key={trip.id}
+                    data={trip}
+                    keys={["from", "to", "passengerVolume", "plateNumber"]}
+                  ></InfoCard>
+                ))}
+              </>
+            )}
+          </Col>
+        </Row>
+      </Container>
+      {/*isOpenAddNew && (
         <Card style={{ width: "40rem" }}>
           <Form onSubmit={addNewUserFormSubmitHandler}>
             <Form.Group className="mb-3 p-2" controlId="formBasicName">
@@ -140,7 +152,7 @@ const UserProfile = () => {
             </Col>
           </Form>
         </Card>
-      )}
+              )*/}
       {isOpenNewTrip && (
         <Form onSubmit={addNewTripFormSubmitHandler}>
           <Form.Group className="mb-3 p-2" controlId="formBasicFrom">

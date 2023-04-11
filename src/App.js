@@ -3,12 +3,12 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import UserProfile from "./pages/UserProfile";
 import Home from "./pages/Home";
 import UserCard from "./components/UserCard";
+import TripCard from "./components/TripCard";
 import { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
 
 const App = () => {
   const { currentUser } = useContext(AuthContext);
-
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/id" />;
   };
@@ -45,6 +45,22 @@ const App = () => {
         element={
           <RequireAuth>
             <UserCard editMode={true} />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/trip"
+        element={
+          <RequireAuth>
+            <TripCard />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/trip/:id"
+        element={
+          <RequireAuth>
+            <TripCard editMode={true} />
           </RequireAuth>
         }
       />

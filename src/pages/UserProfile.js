@@ -12,20 +12,8 @@ import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
 
 const UserProfile = () => {
-  const [isOpenAddNew, setIsOpenAddNew] = useState(false);
-  const [isOpenNewTrip, setIsNewTrip] = useState(false);
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
-  const [plateNum, setPlateNum] = useState("");
-  const [passengerVolume, setPassengerVolume] = useState("");
   const [users, setUsers] = useState([]);
   const [trips, setTrips] = useState([]);
-
-  const toggleState = (state, setState) => () => setState(!state);
-
-  const addNewUserClickHandler = toggleState(isOpenAddNew, setIsOpenAddNew);
-
-  const addNewTripClickHandler = toggleState(isOpenNewTrip, setIsNewTrip);
 
   useEffect(() => {
     const getData = async (collectionName, setState) => {
@@ -41,45 +29,18 @@ const UserProfile = () => {
     getData("trips", setTrips);
   }, []);
 
-  const handleSubmit = (collectionName, data, setState) => async (e) => {
-    e.preventDefault();
-    const docRef = await addDoc(collection(db, collectionName), data);
-    setState(false);
-  };
-
-  //const addNewUserFormSubmitHandler = handleSubmit(
-  //  "users",
-  //  { name, surname, role },
-  //  setIsOpenAddNew
-  //);
-  const addNewTripFormSubmitHandler = handleSubmit(
-    "trips",
-    { from, to, plateNumber: plateNum, passengerVolume },
-    setIsNewTrip
-  );
   return (
     <>
-      {!isOpenAddNew && (
-        <Link to="/user">
-          <Button
-            variant="primary"
-            className="mb-3"
-            onClick={addNewUserClickHandler}
-          >
-            Add new user
-          </Button>
-        </Link>
-      )}
-
-      {!isOpenNewTrip && (
-        <Button
-          variant="primary"
-          className="mb-3"
-          onClick={addNewTripClickHandler}
-        >
+      <Link to="/user">
+        <Button variant="primary" className="mb-3">
+          Add new user
+        </Button>
+      </Link>
+      <Link to="/trip">
+        <Button variant="primary" className="mb-3">
           Add new trip
         </Button>
-      )}
+      </Link>
       <Container>
         <Row>
           <Col>
@@ -106,56 +67,22 @@ const UserProfile = () => {
               <>
                 <Card.Title className="mb-3">All trips:</Card.Title>
                 {trips.map((trip) => (
-                  <InfoCard
-                    key={trip.id}
-                    data={trip}
-                    keys={["from", "to", "passengerVolume", "plateNumber"]}
-                  ></InfoCard>
+                  <Link
+                    to={`/trip/${trip.id}`}
+                    className="text-decoration-none"
+                  >
+                    <InfoCard
+                      key={trip.id}
+                      data={trip}
+                      keys={["from", "to", "passengerVolume", "plateNumber"]}
+                    />{" "}
+                  </Link>
                 ))}
               </>
             )}
           </Col>
         </Row>
       </Container>
-      {isOpenNewTrip && (
-        <Form onSubmit={addNewTripFormSubmitHandler}>
-          <Form.Group className="mb-3 p-2" controlId="formBasicFrom">
-            <Form.Label>From:</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter from"
-              onChange={(e) => setFrom(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3 p-2" controlId="formBasicSurname">
-            <Form.Label>To:</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter to"
-              onChange={(e) => setTo(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3 p-2" controlId="formBasicPlateNum">
-            <Form.Label>Plate number:</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter plate number"
-              onChange={(e) => setPlateNum(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3 p-2" controlId="formBasicPassengerVolume">
-            <Form.Label>Passenger volume:</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter passenger volume"
-              onChange={(e) => setPassengerVolume(e.target.value)}
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit" className="mb-3 mt-3">
-            Add trip
-          </Button>
-        </Form>
-      )}
     </>
   );
 };

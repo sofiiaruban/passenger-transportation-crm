@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 import {
   collection,
   addDoc,
@@ -12,13 +11,11 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
-//import { Link } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
+import UpdateOrAddButton from "./UpdateOrAddButton";
+import DeleteButton from "./DeleteButton";
 
 const UserCard = ({ editMode }) => {
-  //const [name, setName] = useState("");
-  //const [surname, setSurname] = useState("");
-  //const [role, setRole] = useState("");
   const roles = ["Driver", "Passenger", "Manager"];
   const navigate = useNavigate();
   const { id } = useParams();
@@ -29,7 +26,7 @@ const UserCard = ({ editMode }) => {
     role: "",
   });
 
-  const handleChange = (e) => {
+  const setUserFormData = (e) => {
     const value = e.target.value;
     const name = e.target.name;
 
@@ -38,7 +35,8 @@ const UserCard = ({ editMode }) => {
       [name]: value,
     }));
   };
-  const handleSubmit = async (e) => {
+
+  const addUserDataToFirestore = async (e) => {
     try {
       e.preventDefault();
       if (!editMode) {
@@ -53,7 +51,8 @@ const UserCard = ({ editMode }) => {
       console.error("Error handling submit: ", error);
     }
   };
-  const handleClick = async () => {
+
+  const deleteUserDataFromFirestore = async () => {
     try {
       const docRef = doc(db, "users", id);
       await deleteDoc(docRef);
@@ -62,7 +61,8 @@ const UserCard = ({ editMode }) => {
     }
     navigate("/userprofile");
   };
-  const getData = async () => {
+
+  const getUserDataFirestore = async () => {
     try {
       const docRef = doc(db, "users", id);
       const docSnap = await getDoc(docRef);
@@ -77,13 +77,13 @@ const UserCard = ({ editMode }) => {
   };
   useEffect(() => {
     if (editMode) {
-      getData();
+      getUserDataFirestore();
     }
   }, []);
 
   return (
     <Card style={{ width: "40rem" }}>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={addUserDataToFirestore}>
         <Form.Group className="mb-3 p-2" controlId="formBasicName">
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -91,7 +91,7 @@ const UserCard = ({ editMode }) => {
             type="text"
             placeholder="Enter name"
             value={formData.name || ""}
-            onChange={handleChange}
+            onChange={setUserFormData}
           />
         </Form.Group>
         <Form.Group className="mb-3 p-2" controlId="formBasicSurname">
@@ -101,7 +101,7 @@ const UserCard = ({ editMode }) => {
             name="surname"
             placeholder="Enter surname"
             value={formData.surname || ""}
-            onChange={handleChange}
+            onChange={setUserFormData}
           />
         </Form.Group>
 
@@ -115,15 +115,11 @@ const UserCard = ({ editMode }) => {
               value={role}
               label={role}
               checked={formData.role == role}
-              onChange={handleChange}
+              onChange={setUserFormData}
             />
           ))}
-          <Button variant="primary" type="submit" className="mb-3 mt-3">
-            {editMode ? "Update" : "Add user"}
-          </Button>
-          <Button variant="primary" className="mb-3 mt-3" onClick={handleClick}>
-            Delete
-          </Button>
+          <UpdateOrAddButton editMode={editMode} />
+          <DeleteButton clickHandler={deleteUserDataFromFirestore} />
         </Col>
       </Form>
     </Card>

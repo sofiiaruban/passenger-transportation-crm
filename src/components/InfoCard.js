@@ -1,9 +1,6 @@
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
+import EditIcon from "../assets/EditIcon";
 
 const prepareKey = (str) => {
   let preparedKey = str.charAt(0).toUpperCase();
@@ -22,7 +19,8 @@ const InfoCard = ({ data, keys }) => {
   return (
     <Card style={{ width: "30rem" }} className="mb-3">
       <Card.Body>
-        <ListGroup>
+        <EditIcon />
+        <ListGroup className="mt-3">
           {keys.map((key) => (
             <ListGroup.Item key={key}>{`${prepareKey(key)}: ${
               data[key]

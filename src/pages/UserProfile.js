@@ -87,7 +87,10 @@ const UserProfile = () => {
               <>
                 <Card.Title className="mb-3">All users:</Card.Title>
                 {users.map((user) => (
-                  <Link to={`/user/${user.id}`}>
+                  <Link
+                    to={`/user/${user.id}`}
+                    className="text-decoration-none"
+                  >
                     <InfoCard
                       key={user.id}
                       data={user}
@@ -114,45 +117,6 @@ const UserProfile = () => {
           </Col>
         </Row>
       </Container>
-      {/*isOpenAddNew && (
-        <Card style={{ width: "40rem" }}>
-          <Form onSubmit={addNewUserFormSubmitHandler}>
-            <Form.Group className="mb-3 p-2" controlId="formBasicName">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter name"
-                onChange={(e) => setName(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3 p-2" controlId="formBasicSurname">
-              <Form.Label>Surname</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter surname"
-                onChange={(e) => setSurname(e.target.value)}
-              />
-            </Form.Group>
-
-            <Col className="p-1">
-              <Form.Label>Choose role:</Form.Label>
-              {roles.map((role) => (
-                <Form.Check
-                  type="radio"
-                  name="role"
-                  key={role}
-                  value={role}
-                  label={role}
-                  onChange={checkboxOnchangeHandler}
-                />
-              ))}
-              <Button variant="primary" type="submit" className="mb-3 mt-3">
-                Add user
-              </Button>
-            </Col>
-          </Form>
-        </Card>
-              )*/}
       {isOpenNewTrip && (
         <Form onSubmit={addNewTripFormSubmitHandler}>
           <Form.Group className="mb-3 p-2" controlId="formBasicFrom">

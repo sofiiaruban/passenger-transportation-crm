@@ -3,7 +3,14 @@ import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  doc,
+  getDoc,
+  setDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import { db } from "../firebase";
 //import { Link } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
@@ -15,6 +22,7 @@ const UserCard = ({ editMode }) => {
   const roles = ["Driver", "Passenger", "Manager"];
   const navigate = useNavigate();
   const { id } = useParams();
+
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -45,7 +53,15 @@ const UserCard = ({ editMode }) => {
       console.error("Error handling submit: ", error);
     }
   };
-
+  const handleClick = async () => {
+    try {
+      const docRef = doc(db, "users", id);
+      await deleteDoc(docRef);
+    } catch (error) {
+      console.error("Error deleting document: ", error);
+    }
+    navigate("/userprofile");
+  };
   const getData = async () => {
     try {
       const docRef = doc(db, "users", id);
@@ -105,7 +121,7 @@ const UserCard = ({ editMode }) => {
           <Button variant="primary" type="submit" className="mb-3 mt-3">
             {editMode ? "Update" : "Add user"}
           </Button>
-          <Button variant="primary" className="mb-3 p-2" onClick={() => {}}>
+          <Button variant="primary" className="mb-3 mt-3" onClick={handleClick}>
             Delete
           </Button>
         </Col>

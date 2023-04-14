@@ -12,6 +12,7 @@ import { db } from "../firebase";
 import { useNavigate, useParams } from "react-router-dom";
 import UpdateOrAddButton from "./UpdateOrAddButton";
 import DeleteButton from "./DeleteButton";
+import Card from "react-bootstrap/Card";
 
 const TripCard = ({ editMode }) => {
   const navigate = useNavigate();
@@ -75,50 +76,54 @@ const TripCard = ({ editMode }) => {
     }
   }, []);
   return (
-    <Form onSubmit={addTripDataToFirestore}>
-      <Form.Group className="mb-3 p-2" controlId="formBasicFrom">
-        <Form.Label>From:</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter from"
-          name="from"
-          value={formData.from || ""}
-          onChange={setTripFormData}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3 p-2" controlId="formBasicSurname">
-        <Form.Label>To:</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter to"
-          name="to"
-          value={formData.to || ""}
-          onChange={setTripFormData}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3 p-2" controlId="formBasicPlateNum">
-        <Form.Label>Plate number:</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter plate number"
-          name="plateNumber"
-          value={formData.plateNumber || ""}
-          onChange={setTripFormData}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3 p-2" controlId="formBasicPassengerVolume">
-        <Form.Label>Passenger volume:</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter passenger volume"
-          name="passengerVolume"
-          value={formData.passengerVolume || ""}
-          onChange={setTripFormData}
-        />
-      </Form.Group>
-      <UpdateOrAddButton editMode={editMode} />
-      <DeleteButton clickHandler={deleteTripDataFromFirestore} />
-    </Form>
+    <Card style={{ width: "30rem" }} className="mx-auto mt-5 p-3">
+      <Form onSubmit={addTripDataToFirestore}>
+        <Form.Group className="mb-3 p-2" controlId="formBasicFrom">
+          <Form.Label className="fw-bold">From:</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter from"
+            name="from"
+            value={formData.from || ""}
+            onChange={setTripFormData}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3 p-2" controlId="formBasicSurname">
+          <Form.Label className="fw-bold">To:</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter to"
+            name="to"
+            value={formData.to || ""}
+            onChange={setTripFormData}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3 p-2" controlId="formBasicPlateNum">
+          <Form.Label className="fw-bold">Plate number:</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter plate number"
+            name="plateNumber"
+            value={formData.plateNumber || ""}
+            onChange={setTripFormData}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3 p-2" controlId="formBasicPassengerVolume">
+          <Form.Label className="fw-bold">Passenger volume:</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter passenger volume"
+            name="passengerVolume"
+            value={formData.passengerVolume || ""}
+            onChange={setTripFormData}
+          />
+        </Form.Group>
+        <UpdateOrAddButton editMode={editMode} />
+        {editMode && (
+          <DeleteButton clickHandler={deleteTripDataFromFirestore} />
+        )}
+      </Form>
+    </Card>
   );
 };
 export default TripCard;

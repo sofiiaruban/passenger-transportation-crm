@@ -14,6 +14,7 @@ import { db } from "../firebase";
 import { useNavigate, useParams } from "react-router-dom";
 import UpdateOrAddButton from "./UpdateOrAddButton";
 import DeleteButton from "./DeleteButton";
+import Stack from "react-bootstrap/Stack";
 
 const UserCard = ({ editMode }) => {
   const roles = ["Driver", "Passenger", "Manager"];
@@ -82,47 +83,54 @@ const UserCard = ({ editMode }) => {
   }, []);
 
   return (
-    <Card style={{ width: "40rem" }}>
-      <Form onSubmit={addUserDataToFirestore}>
-        <Form.Group className="mb-3 p-2" controlId="formBasicName">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            name="name"
-            type="text"
-            placeholder="Enter name"
-            value={formData.name || ""}
-            onChange={setUserFormData}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3 p-2" controlId="formBasicSurname">
-          <Form.Label>Surname</Form.Label>
-          <Form.Control
-            type="text"
-            name="surname"
-            placeholder="Enter surname"
-            value={formData.surname || ""}
-            onChange={setUserFormData}
-          />
-        </Form.Group>
-
-        <Col className="p-1">
-          <Form.Label>Choose role:</Form.Label>
-          {roles.map((role) => (
-            <Form.Check
-              type="radio"
-              name="role"
-              key={role}
-              value={role}
-              label={role}
-              checked={formData.role == role}
+    <div className="p-5">
+      <Card style={{ width: "30rem" }} className="mx-auto mt-5">
+        <Form onSubmit={addUserDataToFirestore} className="p-3">
+          <Form.Group className="mb-3 p-2">
+            <Form.Label className="fw-bold">Name:</Form.Label>
+            <Form.Control
+              name="name"
+              type="text"
+              placeholder="Enter name"
+              value={formData.name || ""}
               onChange={setUserFormData}
             />
-          ))}
-          <UpdateOrAddButton editMode={editMode} />
-          <DeleteButton clickHandler={deleteUserDataFromFirestore} />
-        </Col>
-      </Form>
-    </Card>
+          </Form.Group>
+          <Form.Group className="mb-3 p-2">
+            <Form.Label className="fw-bold">Surname:</Form.Label>
+            <Form.Control
+              type="text"
+              name="surname"
+              placeholder="Enter surname"
+              value={formData.surname || ""}
+              onChange={setUserFormData}
+            />
+          </Form.Group>
+
+          <Col className="p-1">
+            <Form.Label className="fw-bold">Choose role:</Form.Label>
+            {roles.map((role) => (
+              <Form.Check
+                className="m-1"
+                type="radio"
+                name="role"
+                key={role}
+                value={role}
+                label={role}
+                checked={formData.role == role}
+                onChange={setUserFormData}
+              />
+            ))}
+            <Stack direction="horizontal">
+              <UpdateOrAddButton editMode={editMode} />
+              {editMode && (
+                <DeleteButton clickHandler={deleteUserDataFromFirestore} />
+              )}
+            </Stack>
+          </Col>
+        </Form>
+      </Card>
+    </div>
   );
 };
 export default UserCard;

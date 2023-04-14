@@ -17,14 +17,14 @@ const prepareKey = (str) => {
 
 const InfoCard = ({ data, keys }) => {
   return (
-    <Card style={{ width: "30rem" }} className="mb-3">
+    <Card className="mb-3">
       <Card.Body>
         <EditIcon />
         <ListGroup className="mt-3">
           {keys.map((key) => (
-            <ListGroup.Item key={key}>{`${prepareKey(key)}: ${
-              data[key]
-            }`}</ListGroup.Item>
+            <ListGroup.Item key={key}>
+              <b>{prepareKey(key)}:</b> {data[key]}
+            </ListGroup.Item>
           ))}
         </ListGroup>
       </Card.Body>

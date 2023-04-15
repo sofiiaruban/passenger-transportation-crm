@@ -16,6 +16,7 @@ const UserProfile = () => {
   const [trips, setTrips] = useState([]);
   const [isEditUsers, setIsEditUsers] = useState(false);
   const [isEditTrips, setIsEditTrips] = useState(false);
+
   useEffect(() => {
     const getData = async (collectionName, setState) => {
       const q = query(collection(db, collectionName));

@@ -13,7 +13,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import UpdateOrAddButton from "./UpdateOrAddButton";
 import DeleteButton from "./DeleteButton";
 import Card from "react-bootstrap/Card";
-
+import Stack from "react-bootstrap/Stack";
+import CloseButton from "react-bootstrap/CloseButton";
 const TripCard = ({ editMode }) => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -77,6 +78,7 @@ const TripCard = ({ editMode }) => {
   }, []);
   return (
     <Card style={{ width: "30rem" }} className="mx-auto mt-5 p-3">
+      <CloseButton />
       <Form onSubmit={addTripDataToFirestore}>
         <Form.Group className="mb-3 p-2" controlId="formBasicFrom">
           <Form.Label className="fw-bold">From:</Form.Label>
@@ -118,10 +120,12 @@ const TripCard = ({ editMode }) => {
             onChange={setTripFormData}
           />
         </Form.Group>
-        <UpdateOrAddButton editMode={editMode} />
-        {editMode && (
-          <DeleteButton clickHandler={deleteTripDataFromFirestore} />
-        )}
+        <Stack direction="horizontal">
+          <UpdateOrAddButton editMode={editMode} />
+          {editMode && (
+            <DeleteButton clickHandler={deleteTripDataFromFirestore} />
+          )}
+        </Stack>
       </Form>
     </Card>
   );

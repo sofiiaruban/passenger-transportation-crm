@@ -30,7 +30,10 @@ const UserProfile = () => {
     getData("trips", setTrips);
   }, []);
 
-  const clickHandler = (state, setState) => {
+  const clickHandler = (state, setState, otherState, setOtherState) => {
+    if (otherState) {
+      setOtherState(false);
+    }
     setState(!state);
   };
   return (
@@ -52,12 +55,26 @@ const UserProfile = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               <Nav.Link
-                onClick={() => clickHandler(isEditUsers, setIsEditUsers)}
+                onClick={() =>
+                  clickHandler(
+                    isEditUsers,
+                    setIsEditUsers,
+                    isEditTrips,
+                    setIsEditTrips
+                  )
+                }
               >
                 Edit users
               </Nav.Link>
               <Nav.Link
-                onClick={() => clickHandler(isEditTrips, setIsEditTrips)}
+                onClick={() =>
+                  clickHandler(
+                    isEditTrips,
+                    setIsEditTrips,
+                    isEditUsers,
+                    setIsEditUsers
+                  )
+                }
               >
                 Edit trips
               </Nav.Link>
@@ -117,7 +134,3 @@ const UserProfile = () => {
   );
 };
 export default UserProfile;
-{
-  /*           <Col style={{ width: "250px" }}>
-   */
-}

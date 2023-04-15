@@ -66,14 +66,11 @@ const UserProfile = () => {
         </Container>
       </Navbar>
       {isEditUsers && (
-        <Container className="mx-auto m-5" style={{ width: "30rem" }}>
+        <Container className="mx-auto m-5 " style={{ width: "30rem" }}>
           {users && (
             <>
               <Stack direction="horizontal" className="mb-3">
                 <Card.Title>All users:</Card.Title>
-                <Link to="/user" className="ms-auto">
-                  <Button variant="primary">Add new user</Button>
-                </Link>
               </Stack>
               {users.map((user) => (
                 <Link to={`/user/${user.id}`} className="text-decoration-none">
@@ -84,6 +81,9 @@ const UserProfile = () => {
                   />
                 </Link>
               ))}
+              <Link to="/user" className="ms-auto d-flex flex-row-reverse">
+                <Button variant="primary">Add new user</Button>
+              </Link>
             </>
           )}
         </Container>
@@ -94,11 +94,6 @@ const UserProfile = () => {
             <>
               <Stack direction="horizontal" className="mb-3">
                 <Card.Title>All trips:</Card.Title>
-                <Link to="/trip" className="ms-auto">
-                  <Button variant="primary" className="">
-                    Add new trip
-                  </Button>
-                </Link>
               </Stack>
               {trips.map((trip) => (
                 <Link to={`/trip/${trip.id}`} className="text-decoration-none">
@@ -109,6 +104,11 @@ const UserProfile = () => {
                   />
                 </Link>
               ))}
+              <Link to="/trip" className="ms-auto d-flex flex-row-reverse">
+                <Button variant="primary" className="">
+                  Add new trip
+                </Button>
+              </Link>
             </>
           )}
         </Container>

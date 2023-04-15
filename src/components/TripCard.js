@@ -80,7 +80,7 @@ const TripCard = ({ editMode }) => {
     <Card style={{ width: "30rem" }} className="mx-auto mt-5 p-3">
       <CloseButton />
       <Form onSubmit={addTripDataToFirestore}>
-        <Form.Group className="mb-3 p-2" controlId="formBasicFrom">
+        <Form.Group className="mb-3 p-2">
           <Form.Label className="fw-bold">From:</Form.Label>
           <Form.Control
             type="text"
@@ -90,7 +90,7 @@ const TripCard = ({ editMode }) => {
             onChange={setTripFormData}
           />
         </Form.Group>
-        <Form.Group className="mb-3 p-2" controlId="formBasicSurname">
+        <Form.Group className="mb-3 p-2">
           <Form.Label className="fw-bold">To:</Form.Label>
           <Form.Control
             type="text"
@@ -100,7 +100,7 @@ const TripCard = ({ editMode }) => {
             onChange={setTripFormData}
           />
         </Form.Group>
-        <Form.Group className="mb-3 p-2" controlId="formBasicPlateNum">
+        <Form.Group className="mb-3 p-2">
           <Form.Label className="fw-bold">Plate number:</Form.Label>
           <Form.Control
             type="text"
@@ -110,7 +110,7 @@ const TripCard = ({ editMode }) => {
             onChange={setTripFormData}
           />
         </Form.Group>
-        <Form.Group className="mb-3 p-2" controlId="formBasicPassengerVolume">
+        <Form.Group className="mb-3 p-2">
           <Form.Label className="fw-bold">Passenger volume:</Form.Label>
           <Form.Control
             type="text"

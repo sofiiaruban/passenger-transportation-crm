@@ -78,7 +78,9 @@ const TripCard = ({ editMode }) => {
   }, []);
   return (
     <Card style={{ width: "30rem" }} className="mx-auto mt-5 p-3">
-      <CloseButton />
+      <Stack direction="horizontal" className="d-flex flex-row-reverse">
+        <CloseButton onClick={() => navigate("/userprofile")} />
+      </Stack>
       <Form onSubmit={addTripDataToFirestore}>
         <Form.Group className="mb-3 p-2">
           <Form.Label className="fw-bold">From:</Form.Label>

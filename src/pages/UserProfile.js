@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { collection } from "firebase/firestore";
 import { db } from "../firebase";

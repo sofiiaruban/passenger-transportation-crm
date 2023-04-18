@@ -5,7 +5,10 @@ import Card from "react-bootstrap/Card";
 
 const CardComponent = () => {
   return (
-    <Card style={{ width: "40rem" }}>
+    <Card
+      style={{ width: "30rem" }}
+      className="d-flex justify-content-center mx-auto mb-auto mt-auto"
+    >
       <Tabs
         defaultActiveKey="logIn"
         id="uncontrolled-tab-example"

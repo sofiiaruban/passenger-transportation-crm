@@ -5,12 +5,11 @@ import Col from "react-bootstrap/Col";
 
 const Home = () => {
   return (
-    <Container className="d-flex justify-content-center">
-      <Row>
-        <Col>
-          <CardComponent />
-        </Col>
-      </Row>
+    <Container
+      style={{ height: "40rem", width: "40rem" }}
+      className="d-flex justify-content-center align-items-center"
+    >
+      <CardComponent />
     </Container>
   );
 };

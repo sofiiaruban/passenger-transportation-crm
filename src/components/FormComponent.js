@@ -3,9 +3,10 @@ import { Button } from "react-bootstrap";
 import { useState, useContext } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import Stack from "react-bootstrap/Stack";
+
 const FormComponent = ({ num }) => {
   const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
@@ -26,9 +27,9 @@ const FormComponent = ({ num }) => {
       });
   };
   return (
-    <Form onSubmit={handlerSubmit}>
+    <Form onSubmit={handlerSubmit} className="mx-auto p-3">
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address {num}</Form.Label>
+        <Form.Label>Email {num}</Form.Label>
         <Form.Control
           type="email"
           placeholder="Enter email"
@@ -44,12 +45,14 @@ const FormComponent = ({ num }) => {
           onChange={(e) => setPassword(e.target.value)}
         />
         {error && (
-          <Form.Text className="text-muted">Wrong email or password.</Form.Text>
+          <Form.Text className="text-muted">Wrong email or passwords</Form.Text>
         )}
       </Form.Group>
-      <Button variant="primary" type="submit" className="mb-3">
-        Submit
-      </Button>
+      <Stack direction="horizontal" className="d-flex flex-row-reverse">
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Stack>
     </Form>
   );
 };

@@ -7,7 +7,7 @@ const CardComponent = () => {
   return (
     <Card
       style={{ width: "30rem" }}
-      className="d-flex justify-content-center mx-auto mb-auto mt-auto"
+      className="d-flex justify-content-center mx-auto"
     >
       <Tabs
         defaultActiveKey="logIn"

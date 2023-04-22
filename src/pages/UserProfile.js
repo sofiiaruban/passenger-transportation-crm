@@ -83,7 +83,7 @@ const UserProfile = () => {
         </Container>
       </Navbar>
       {isEditUsers && (
-        <Container className="mx-auto m-5 " style={{ width: "30rem" }}>
+        <Container className="mx-auto mt-2" style={{ width: "30rem" }}>
           {users && (
             <>
               <Stack direction="horizontal" className="mb-3">
@@ -106,7 +106,7 @@ const UserProfile = () => {
         </Container>
       )}
       {isEditTrips && (
-        <Container className="mx-auto m-5" style={{ width: "30rem" }}>
+        <Container className="mx-auto mt-2" style={{ width: "30rem" }}>
           {trips && (
             <>
               <Stack direction="horizontal" className="mb-3">

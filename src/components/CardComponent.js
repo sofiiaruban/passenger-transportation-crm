@@ -2,13 +2,11 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import FormComponent from "./FormComponent";
 import Card from "react-bootstrap/Card";
+import SingIn from "./SingIn";
 
 const CardComponent = () => {
   return (
-    <Card
-      style={{ width: "30rem" }}
-      className="d-flex justify-content-center mx-auto"
-    >
+    <Card style={{ width: "30rem" }}>
       <Tabs
         defaultActiveKey="logIn"
         id="uncontrolled-tab-example"
@@ -18,7 +16,7 @@ const CardComponent = () => {
           <FormComponent num="1" />
         </Tab>
         <Tab eventKey="singIn" title="Sing In">
-          <FormComponent num="2" />
+          <SingIn />
         </Tab>
       </Tabs>
     </Card>

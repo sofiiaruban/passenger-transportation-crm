@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 const UserProfile = () => {
   const [users, setUsers] = useState([]);
   const [trips, setTrips] = useState([]);
-  const [isEditUsers, setIsEditUsers] = useState(false);
+  const [isEditUsers, setIsEditUsers] = useState(true);
   const [isEditTrips, setIsEditTrips] = useState(false);
 
   useEffect(() => {
@@ -40,19 +40,15 @@ const UserProfile = () => {
     <>
       <Navbar
         bg="light"
-        expand="xxl"
-        className="d-flex justify-content-between"
+        expand="xl"
+        className="d-flex justify-content-between flex-row-reverse"
       >
         <Container>
-          <Navbar.Toggle
-            aria-controls="basic-navbar-nav"
-            className="mb-2"
-            onClick={() => {
-              setIsEditUsers(false);
-              setIsEditTrips(false);
-            }}
-          />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className="mb-2" />
+          <Navbar.Collapse
+            id="basic-navbar-nav"
+            className="d-flex flex-row-reverse"
+          >
             <Nav className="ml-auto">
               <Nav.Link
                 onClick={() =>
@@ -64,7 +60,7 @@ const UserProfile = () => {
                   )
                 }
               >
-                Edit users
+                Users
               </Nav.Link>
               <Nav.Link
                 onClick={() =>
@@ -76,7 +72,7 @@ const UserProfile = () => {
                   )
                 }
               >
-                Edit trips
+                Trips
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>

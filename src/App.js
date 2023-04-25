@@ -52,7 +52,7 @@ const App = () => {
         path="/trip"
         element={
           <RequireAuth>
-            <TripCard />
+            <UserCard />
           </RequireAuth>
         }
       />

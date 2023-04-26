@@ -1,19 +1,19 @@
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import FormComponent from "./FormComponent";
+import LogIn from "./LogIn";
 import Card from "react-bootstrap/Card";
 import SingIn from "./SingIn";
 
 const CardComponent = () => {
   return (
-    <Card style={{ width: "30rem" }}>
+    <Card style={{ width: "30rem" }} className="shadow">
       <Tabs
         defaultActiveKey="logIn"
         id="uncontrolled-tab-example"
         className="mb-3"
       >
         <Tab eventKey="logIn" title="Log In">
-          <FormComponent num="1" />
+          <LogIn />
         </Tab>
         <Tab eventKey="singIn" title="Sing In">
           <SingIn />

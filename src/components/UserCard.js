@@ -84,7 +84,7 @@ const UserCard = ({ editMode }) => {
   }, []);
 
   return (
-    <Card style={{ width: "30rem" }} className="mx-auto mt-5 p-3">
+    <Card style={{ width: "30rem" }} className=" shadow mx-auto mt-5 p-3">
       <Stack direction="horizontal" className="d-flex flex-row-reverse">
         <CloseButton onClick={() => navigate("/userprofile")} />
       </Stack>

@@ -17,7 +17,7 @@ const prepareKey = (str) => {
 
 const InfoCard = ({ data, keys }) => {
   return (
-    <Card className="mb-3">
+    <Card className="bg-white mb-3 shadow">
       <Card.Body>
         <EditIcon />
         <ListGroup className="mt-3">

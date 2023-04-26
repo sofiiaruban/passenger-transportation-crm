@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { collection } from "firebase/firestore";
@@ -38,44 +38,35 @@ const UserProfile = () => {
   };
   return (
     <>
-      <Navbar
-        bg="light"
-        expand="xl"
-        className="d-flex justify-content-between flex-row-reverse"
-      >
-        <Container>
+      <Navbar bg="light" expand="xl" className="d-flex justify-content-between">
+        <Container className="d-flex flex-row-reverse">
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="mb-2" />
-          <Navbar.Collapse
-            id="basic-navbar-nav"
-            className="d-flex flex-row-reverse"
-          >
-            <Nav className="ml-auto">
-              <Nav.Link
-                onClick={() =>
-                  clickHandler(
-                    isEditUsers,
-                    setIsEditUsers,
-                    isEditTrips,
-                    setIsEditTrips
-                  )
-                }
-              >
-                Users
-              </Nav.Link>
-              <Nav.Link
-                onClick={() =>
-                  clickHandler(
-                    isEditTrips,
-                    setIsEditTrips,
-                    isEditUsers,
-                    setIsEditUsers
-                  )
-                }
-              >
-                Trips
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
+          <Nav className="ml-auto">
+            <Nav.Link
+              onClick={() =>
+                clickHandler(
+                  isEditUsers,
+                  setIsEditUsers,
+                  isEditTrips,
+                  setIsEditTrips
+                )
+              }
+            >
+              Users
+            </Nav.Link>
+            <Nav.Link
+              onClick={() =>
+                clickHandler(
+                  isEditTrips,
+                  setIsEditTrips,
+                  isEditUsers,
+                  setIsEditUsers
+                )
+              }
+            >
+              Trips
+            </Nav.Link>
+          </Nav>
         </Container>
       </Navbar>
       {isEditUsers && (
@@ -85,8 +76,12 @@ const UserProfile = () => {
               <Stack direction="horizontal" className="mb-3">
                 <Card.Title>All users:</Card.Title>
               </Stack>
-              {users.map((user) => (
-                <Link to={`/user/${user.id}`} className="text-decoration-none">
+              {users.map((user, index) => (
+                <Link
+                  to={`/user/${user.id}`}
+                  className="text-decoration-none"
+                  key={user.id + "-" + index}
+                >
                   <InfoCard
                     key={user.id}
                     data={user}
@@ -108,8 +103,12 @@ const UserProfile = () => {
               <Stack direction="horizontal" className="mb-3">
                 <Card.Title>All trips:</Card.Title>
               </Stack>
-              {trips.map((trip) => (
-                <Link to={`/trip/${trip.id}`} className="text-decoration-none">
+              {trips.map((trip, index) => (
+                <Link
+                  to={`/trip/${trip.id}`}
+                  className="text-decoration-none"
+                  key={trip.id + "-" + index}
+                >
                   <InfoCard
                     key={trip.id}
                     data={trip}

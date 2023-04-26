@@ -34,7 +34,7 @@ const SignIn = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="mx-auto p-3">
+    <Form onSubmit={handleSubmit} className="bg-white mx-auto p-3">
       <Form.Group className="mb-3" controlId="formBasicName">
         <Form.Label>Name</Form.Label>
         <Form.Control
@@ -59,7 +59,7 @@ const SignIn = () => {
         <Form.Label>Password</Form.Label>
         <Form.Control
           type="password"
-          placeholder="Password"
+          placeholder="Enter password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
